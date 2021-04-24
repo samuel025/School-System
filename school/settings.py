@@ -48,7 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'management.LoginCheckMiddleware.LoginCheckMiddleWare',
+    'management.LoginCheckMiddleware.LoginCheckMiddleWare',
     'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
@@ -129,7 +129,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 AUTH_USER_MODEL = "management.CustomUser"
 AUTHENTICATION_BACKENDS =['management.EmailBackend.EmailBackEnd']
 
-STATIC_FILES_STORAGE = 'whitenoise.django.GzipManifestStaticFileStorage'
+STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 import dj_database_url
