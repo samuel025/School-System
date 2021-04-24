@@ -25,7 +25,7 @@ SECRET_KEY = 'k8lie-bfmfen$3ffian_v81uip7w5xdhjuga-0l1cfsx!&zka-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['samschools.herokuapp.com']
 
 
 # Application definition
