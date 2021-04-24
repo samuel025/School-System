@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: sam_olayemi65@yahoo.com
+Date: Tue, 20 Apr 2021 21:17:27 -0000
+Message-ID: <161895344767.12280.1404308766957705214@DESKTOP-1QI0BUC>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/accounts/reset/Mg/alfcl3-8d86c465c8761532d97bbe773aa92ff3/
+
+Your username, in case you’ve forgotten: boluwatife
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------
