@@ -1,13 +1,13 @@
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils.deprecation import MiddlewareMixin
-from django.contrib import admin
 
 
 class LoginCheckMiddleWare(MiddlewareMixin):
 
     def process_view(self,request,view_func,view_args,view_kwargs):
         modulename=view_func.__module__
+        print(modulename)
         user=request.user
         if user.is_authenticated:
             if user.user_type == "1":
@@ -15,10 +15,12 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                     pass
                 elif modulename == "management.views" or modulename == "django.views.static":
                     pass
+                elif modulename == "django.contrib.auth.views" or modulename =="django.contrib.admin.sites":
+                    pass
                 else:
                     return HttpResponseRedirect(reverse("admin_home"))
             elif user.user_type == "2":
-                if modulename == "management.StaffViews" or "management.EditResultViewClass":
+                if modulename == "management.StaffViews" or modulename == "management.EditResultVIewClass":
                     pass
                 elif modulename == "management.views" or modulename == "django.views.static":
                     pass
@@ -35,7 +37,7 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                 return HttpResponseRedirect(reverse("show_login"))
 
         else:
-            if request.path == reverse("show_login") or request.path == reverse("do_login") or modulename == "django.contrib.auth.urls":
+            if request.path == reverse("show_login") or request.path == reverse("login") or modulename == "django.contrib.auth.views" or modulename =="django.contrib.admin.sites" or modulename=="management.views":
                 pass
             else:
                 return HttpResponseRedirect(reverse("show_login"))
