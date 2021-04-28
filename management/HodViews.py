@@ -95,10 +95,10 @@ def add_course_save(request):
         try:
             course_model = Courses(course_name=course)
             course_model.save()
-            messages.success(request, "Course added sucessfully")
+            messages.success(request, "Class added sucessfully")
             return HttpResponseRedirect(reverse("add_course"))
         except:
-            messages.error(request, "Failed to add course")
+            messages.error(request, "Failed to add Class")
             return HttpResponseRedirect(reverse("add_course"))
 
 def add_student(request):
