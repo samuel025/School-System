@@ -270,7 +270,7 @@ def edit_student_save(request):
 
                 student.address=address
                 session_year = SessionYearModel.objects.get(id=session_year_id)
-                students.session_year_id=session_year
+                student.session_year_id=session_year
                 student.gender=sex
                 course=Courses.objects.get(id=course_id)
                 student.course_id= course
