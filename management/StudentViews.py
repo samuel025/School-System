@@ -88,4 +88,4 @@ def student_profile_save(request):
 def student_view_result(request):
     student = Students.objects.get(admin=request.user.id)
     studentresult = StudentResult.objects.filter(student_id=student.id)
-    return render(request, "student_template/student_result.html", {"studentresult":studentresult})
+    return render(request, "student_template/student_result.html", {"studentresult":studentresult, "student":student})

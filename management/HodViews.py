@@ -348,14 +348,20 @@ def add_session_save(request):
     else:
         session_start_year = request.POST.get("session_start")
         session_end_year = request.POST.get("session_end")
-        try:
-            sessionyear = SessionYearModel(session_start_year=session_start_year, session_end_year=session_end_year)
-            sessionyear.save()
-            messages.success(request,"Added Successfuly")
-            return HttpResponseRedirect(reverse("manage_session"))
-        except:
-            messages.error(request,"Failed To Add")
-            return HttpResponseRedirect(reverse("manage_session"))
+        session_term = request.POST.get("session_term")
+    try:
+        sessionyear = SessionYearModel(session_start_year=session_start_year, session_end_year=session_end_year, session_term=session_term)
+        sessionyear.save()
+        student_obj=Students.objects.all()
+        session_year = SessionYearModel.objects.get(id=sessionyear.id)
+        for students in student_obj:
+            students.session_year_id = session_year
+            students.save()
+        messages.success(request,"Added Successfuly")
+        return HttpResponseRedirect(reverse("manage_session"))
+    except:
+        messages.error(request,"Failed To Add")
+        return HttpResponseRedirect(reverse("manage_session"))
 
 @csrf_exempt
 def check_email_exist(request):
@@ -465,3 +471,19 @@ def admin_profile_save(request):
         except:
             messages.error(request, "Failed to Update Profile")
             return HttpResponseRedirect(reverse("admin_profile"))
+
+def edit_session_year(request):
+    session = SessionYearModel.objects.all()
+    return render(request, "hod_template/edit_session_year.html", {"sessions":session})
+
+def delete_session(request, session_id):
+    session = SessionYearModel.objects.get(id=session_id)
+    try:
+        session.delete()
+        messages.success(request, "Sucessfully Deleted Session")
+        return HttpResponseRedirect(reverse("edit_session_year"))
+    except:
+        messages.error(request, "Failed to Delete")
+        return HttpResponseRedirect(reverse("edit_session_year"))
+
+

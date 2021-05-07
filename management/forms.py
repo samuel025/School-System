@@ -33,7 +33,7 @@ class AddStudentForm(forms.Form):
     try:
         sessions = SessionYearModel.objects.all()
         for session in sessions:
-            small_session = (session.id, str(session.session_start_year)+" TO "+str(session.session_end_year))
+            small_session = (session.id, str(session.session_start_year)+" TO "+str(session.session_end_year)+"("+(session.session_term)+")") 
             session_list.append(small_session)
     except:
         session_list =[]

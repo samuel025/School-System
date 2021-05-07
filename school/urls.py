@@ -20,6 +20,7 @@ from school import settings
 from management.StaffViews import *
 from management.StudentViews import *
 from management.EditResultViewClass import EditResultViewClass
+
 from management.HodViews import *
 from django.urls import include
 from management.views import HomePage, ShowLoginPage, doLogin, GetUserDetails, logout_user
@@ -70,6 +71,8 @@ urlpatterns = [
     path('admin_profile', admin_profile,name="admin_profile"),
     path('admin_profile_save', admin_profile_save,name="admin_profile_save"),
     path('student_view_result', student_view_result, name="student_view_result"),
+    path('edit_session_year', edit_session_year, name="edit_session_year"), 
+    path('delete_session/<str:session_id>', delete_session, name="delete_session"), 
     #staff_urls
     path('staff_home', staff_home, name="staff_home"),
     path('staff_apply_leave', staff_apply_leave, name="staff_apply_leave"),

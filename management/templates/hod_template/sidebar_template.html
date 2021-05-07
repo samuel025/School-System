@@ -113,6 +113,17 @@
           </li>
 
           <li class="nav-item">
+            {% url 'edit_session_year' as edit_session_year %}
+            <a href="{{ edit_session_year }}" class="nav-link {% if request.path == edit_session_year %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Delete Sessions
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             {% url 'add_subject' as add_subject %}
             <a href="{{ add_subject }}" class="nav-link {% if request.path == add_subject %} active {% endif %}">
               <i class="nav-icon fas fa-th"></i>
