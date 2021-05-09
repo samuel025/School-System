@@ -94,7 +94,7 @@ class EditResultForm(forms.Form):
         try:
             subjects = Subjects.objects.filter(staff_id=self.staff_id)
             for subject in subjects:
-                subject_single = (subject.id, subject.subject_name)
+                subject_single = (subject.id, str(subject.subject_name) +" "+ str(subject.course_id.course_name))
                 subject_list.append(subject_single)
         except:
             subject_list = []

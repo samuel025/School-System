@@ -22,7 +22,7 @@ Add Results
                     <label>Subject </label>
                     <select class="form-control" name="subject" id="subject">
                         {% for subject in subjects %}
-                          <option value="{{ subject.id }}">{{ subject.subject_name }}</option>
+                          <option value="{{ subject.id }}">{{ subject.subject_name }} ({{subject.course_id.course_name}})</option>
                         {% endfor %}
                     </select>
                   </div>
