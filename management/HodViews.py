@@ -483,7 +483,7 @@ def delete_session(request, session_id):
         messages.success(request, "Sucessfully Deleted Session")
         return HttpResponseRedirect(reverse("edit_session_year"))
     except:
-        messages.error(request, "Failed to Delete")
+        messages.error(request, "Failed to Delete Session Year")
         return HttpResponseRedirect(reverse("edit_session_year"))
 
 
