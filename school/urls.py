@@ -94,4 +94,5 @@ urlpatterns = [
     path('student_feedback_save', student_feedback_save, name="student_feedback_save"),
     path('student_profile', student_profile,name="student_profile"),
     path('student_profile_save', student_profile_save,name="student_profile_save"),
+    path('view_result/<str:session_id>', view_result, name="view_result"),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

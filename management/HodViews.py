@@ -349,8 +349,9 @@ def add_session_save(request):
         session_start_year = request.POST.get("session_start")
         session_end_year = request.POST.get("session_end")
         session_term = request.POST.get("session_term")
+        session_term_year = request.POST.get("session_term_year")
     try:
-        sessionyear = SessionYearModel(session_start_year=session_start_year, session_end_year=session_end_year, session_term=session_term)
+        sessionyear = SessionYearModel(session_start_year=session_start_year, session_end_year=session_end_year, session_term=session_term, session_year_session=session_term_year)
         sessionyear.save()
         student_obj=Students.objects.all()
         session_year = SessionYearModel.objects.get(id=sessionyear.id)
@@ -483,7 +484,7 @@ def delete_session(request, session_id):
         messages.success(request, "Sucessfully Deleted Session")
         return HttpResponseRedirect(reverse("edit_session_year"))
     except:
-        messages.error(request, "Failed to Delete")
+        messages.error(request, "Failed to Delete Session Year")
         return HttpResponseRedirect(reverse("edit_session_year"))
 
 

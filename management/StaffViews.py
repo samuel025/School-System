@@ -110,7 +110,7 @@ def get_students(request):
 
     subject=Subjects.objects.get(id=subject_id)
     session_model=SessionYearModel.objects.get(id=session_year)
-    students=Students.objects.filter(course_id=subject.course_id,session_year_id=session_model)
+    students=Students.objects.filter(course_id=subject.course_id)
     list_data=[]
 
     for student in students:
@@ -131,22 +131,26 @@ def save_student_result(request):
     assignment_marks=request.POST.get('assignment_marks')
     exam_marks=request.POST.get('exam_marks')
     subject_id=request.POST.get('subject')
+    session = request.POST.get('session_year')
+
 
 
     student_obj=Students.objects.get(admin=student_admin_id)
+    student_class = student_obj.course_id
     subject_obj=Subjects.objects.get(id=subject_id)
+    session_year_id = SessionYearModel.objects.get(id=session)
 
     try:
-        check_exist=StudentResult.objects.filter(subject_id=subject_obj,student_id=student_obj).exists()
+        check_exist=StudentResult.objects.filter(subject_id=subject_obj,student_id=student_obj, session_year_id=session_year_id, class_result=student_class).exists()
         if check_exist:
-            result=StudentResult.objects.get(subject_id=subject_obj,student_id=student_obj)
+            result=StudentResult.objects.get(subject_id=subject_obj,student_id=student_obj, session_year_id=session_year_id, class_result=student_class)
             result.subject_assignment_marks=assignment_marks
             result.subject_exam_marks=exam_marks
             result.save()
             messages.success(request, "Successfully Updated Result")
             return HttpResponseRedirect(reverse("staff_add_result"))
         else:
-            result=StudentResult(student_id=student_obj,subject_id=subject_obj,subject_exam_marks=exam_marks,subject_assignment_marks=assignment_marks)
+            result=StudentResult(student_id=student_obj,subject_id=subject_obj,subject_exam_marks=exam_marks,subject_assignment_marks=assignment_marks, session_year_id=session_year_id, class_result=student_class)
             result.save()
             messages.success(request, "Successfully Added Result")
             return HttpResponseRedirect(reverse("staff_add_result"))
@@ -166,3 +170,4 @@ def fetch_result_student(request):
         return HttpResponse(json.dumps(result_data))
     else:
         return HttpResponse("False")
+

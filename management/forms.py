@@ -47,7 +47,9 @@ class AddStudentForm(forms.Form):
     sex = forms.ChoiceField(label="Sex", choices=gender_choice, widget=forms.Select(attrs={"class":"form-control"}))
     session_year_id = forms.ChoiceField(label="Session Year", widget=forms.Select(attrs={"class":"form-control"}), choices=session_list)
     profile_pic = forms.FileField(label="Profile Picture", widget=forms.FileInput(attrs={"class":"form-control"}))
-
+    
+    
+   
 
 class EditStudentForm(forms.Form):
     email = forms.EmailField(label="Email", max_length=50, widget=forms.EmailInput(attrs={"class":"form-control"}))
@@ -84,6 +86,7 @@ class EditStudentForm(forms.Form):
     sex = forms.ChoiceField(label="Sex", choices=gender_choice, widget=forms.Select(attrs={"class":"form-control"}))
     session_year_id = forms.ChoiceField(label="Session Year", widget=forms.Select(attrs={"class":"form-control"}), choices=session_list)
     profile_pic = forms.FileField(label="Profile Picture",required=False, widget=forms.FileInput(attrs={"class":"form-control"}))
+
 
 class EditResultForm(forms.Form):
     def __init__(self, *args, **kwargs):
