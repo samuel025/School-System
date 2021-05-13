@@ -126,21 +126,21 @@ def add_student_save(request):
                 filename = fs.save(profile_pic.name,profile_pic)
                 profile_pic_url = fs.url(filename)
 
-                try:
-                    user=CustomUser.objects.create_user(username=username,password=password,email=email,last_name=last_name,first_name=first_name,user_type=3)
-                    user.students.address=address
-                    course_obj=Courses.objects.get(id=course_id)
-                    session_year = SessionYearModel.objects.get(id=session_year_id)
-                    user.students.session_year_id=session_year
-                    user.students.course_id=course_obj
-                    user.students.gender=sex
-                    user.students.profile_pic=profile_pic_url
-                    user.save()
-                    messages.success(request,"Successfully Added Student")
-                    return HttpResponseRedirect(reverse("add_student"))
-                except:
-                    messages.error(request,"Failed to Add Student")
-                    return HttpResponseRedirect(reverse("add_student"))
+                # try:
+                user=CustomUser.objects.create_user(username=username,password=password,email=email,last_name=last_name,first_name=first_name,user_type=3)
+                user.students.address=address
+                course_obj=Courses.objects.get(id=course_id)
+                session_year = SessionYearModel.objects.get(id=session_year_id)
+                user.students.session_year_id=session_year
+                user.students.course_id=course_obj
+                user.students.gender=sex
+                user.students.profile_pic=profile_pic_url
+                user.save()
+                messages.success(request,"Successfully Added Student")
+                return HttpResponseRedirect(reverse("add_student"))
+                # except:
+                #     messages.error(request,"Failed to Add Student")
+                #     return HttpResponseRedirect(reverse("add_student"))
             else:
                 form=AddStudentForm(request.POST)
                 return render(request, "hod_template/add_student.html", {"form":form})
