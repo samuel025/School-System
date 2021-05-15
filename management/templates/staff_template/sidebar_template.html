@@ -91,6 +91,28 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            {% url 'staff_add_assignment' as staff_add_assignment %}
+            <a href="{{ staff_add_assignment }}" class="nav-link {% if request.path == staff_add_assignment %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Add Assignment
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            {% url 'staff_manage_assignment' as staff_manage_assignment %}
+            <a href="{{ staff_manage_assignment }}" class="nav-link {% if request.path == staff_manage_assignment %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Manage Assignments
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

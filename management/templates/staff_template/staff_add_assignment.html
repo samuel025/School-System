@@ -1,6 +1,6 @@
-{% extends 'student_template/base_template.html' %}
+{% extends 'staff_template/base_template.html' %}
 {% block page_title %}
-Feedback Message
+Add Assignment
 {% endblock page_title %}
 {% block main_content %}
     <!-- Main content -->
@@ -9,19 +9,27 @@ Feedback Message
                     <div class="row">
               <div class="col-md-12">
             <!-- general form elements -->
+             <form action="{% url 'staff_assignment_save' %}" method="post">
+                 {% csrf_token %}
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Send a message to the school</h3>
+                <h3 class="card-title">Add Assignments</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-               <form action="{% url 'student_feedback_save' %}" method="post">
                 <div class="card-body">
-
-                    {% csrf_token %}
+                   <div class="form-group">
+                    <label>Subject </label>
+                    <select class="form-control" name="subject" id="subject">
+                        {% for subject in subjects %}
+                          <option value="{{ subject.id }}">{{ subject.subject_name }} ({{subject.course_id.course_name}})</option>
+                        {% endfor %}
+                    </select>
+                  </div>
                   <div class="form-group">
-                    <label>Feedback Message</label>
-                    <textarea class="form-control" rows="6" name="feedback_msg"></textarea>
+                    <label>Assignment</label>
+                    <textarea rows="5" cols="40" class="form-control" name="assignment" id="assignment">
+                    </textarea>
                   </div>
                    <div class="form-group">
                       {% if messages %}
@@ -40,39 +48,20 @@ Feedback Message
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary btn-block" id="fetch_student">Leave a Message</button>
+                  <button type="submit" class="btn btn-primary btn-block">Add Assignment</button>
                 </div>
-               </form>
-            </div>
+                <div id="student_data" class="card-footer">
 
+                </div>
+            </div>
+             </form>
             <!-- /.card -->
-           <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Message History</h3>
-              </div>
-
-               <div class="table">
-               <table class="table">
-                   <tr>
-                       <th>ID</th>
-                       <th>Message</th>
-                       <th>Reply</th>
-                   </tr>
-                   {% for row in feedback_data %}
-                        <tr>
-                            <td>{{ row.id }}</td>
-                            <td>{{ row.feedback }}</td>
-                            <td>{{ row.feedback_reply }}</td>
-                        </tr>
-                   {% endfor %}
-               </table>
-               </div>
-            </div>
 
 
 
           </div>
           </div>
+
       </div>
     </section>
     <!-- /.content -->

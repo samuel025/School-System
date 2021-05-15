@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
-from management.models import CustomUser, Staffs, Courses, SessionYearModel, Subjects, Students, LeaveReportStudent, StudentResult, FeedBackStudent
+from management.models import CustomUser, Staffs, Courses, StudentAssignments, SessionYearModel, Subjects, Students, LeaveReportStudent, StudentResult, FeedBackStudent
 
 def student_home(request):
     student_obj=Students.objects.get(admin=request.user.id)
@@ -96,3 +96,9 @@ def view_result(request, session_id):
     studentresult = StudentResult.objects.filter(student_id=student.id).filter(session_year_id=session_id)
     student_result_class = StudentResult.objects.filter(student_id=student.id).filter(session_year_id=session_id).first()
     return render(request, "student_template/view_student_result.html", {"studentresult":studentresult, "student_class":student_result_class})
+
+def view_assignments(request):
+    student_obj=Students.objects.get(admin=request.user.id)
+    course=Courses.objects.get(id=student_obj.course_id.id)
+    studentassignment = StudentAssignments.objects.filter(course_id=course)
+    return render(request, "student_template/view_assignment.html", {"assignment":studentassignment})

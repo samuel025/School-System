@@ -86,8 +86,13 @@ urlpatterns = [
     path('save_student_result', save_student_result, name="save_student_result"),
     path('edit_student_result',EditResultViewClass.as_view(), name="edit_student_result"),
     path('fetch_result_student',fetch_result_student, name="fetch_result_student"),
+    path('staff_add_assignment',staff_add_assignment, name="staff_add_assignment"),
+    path('staff_assignment_save',staff_assignment_save, name="staff_assignment_save"),
+    path('staff_manage_assignment',staff_manage_assignment, name="staff_manage_assignment"),
+    path('delete_assignment/<str:assignment_id>', delete_assignment, name="delete_assignment"),
     #student urls
     path('student_home', student_home, name="student_home"),
+    path('view_assignments', view_assignments, name="view_assignments"),
     path('student_apply_leave', student_apply_leave, name="student_apply_leave"),
     path('student_apply_leave_save', student_apply_leave_save, name="student_apply_leave_save"),
     path('student_feedback', student_feedback, name="student_feedback"),

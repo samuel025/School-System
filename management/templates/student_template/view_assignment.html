@@ -1,0 +1,61 @@
+{% extends 'student_template/base_template.html' %}
+{% block page_title %}
+Assignments
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+                    <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements --
+
+            <!-- /.card -->
+           <div class="card card-primary">
+              <div class="card-header">
+                  
+                <h3 class="card-title">Assignments </h3>
+              </div>
+              <section class="content">
+                <br>
+                <!-- Default box -->
+                {% if assignment %}
+                {% for ass in assignment %}
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Subject: {{ass.subject_id.subject_name}}; <small><i>Date: {{ass.date_added}}</i></small><br>
+                      Teacher: {{ass.staff_id.admin.first_name}} {{ass.staff_id.admin.last_name}}
+                    </h3>
+          
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    {{ass.assignment|linebreaks}}
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                {% endfor %}
+                {% else %}
+                <center><p><i>You dont have any assignment yet</i></p></center>
+                {% endif %}
+                <!-- /.card -->
+          
+              </section>
+               
+            </div>
+
+
+
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

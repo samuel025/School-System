@@ -68,24 +68,6 @@ class Students(models.Model):
     def __str__(self):
         return self.admin.username
 
-class Attendance(models.Model):
-    id=models.AutoField(primary_key=True)
-    subject_id=models.ForeignKey(Subjects,on_delete=models.DO_NOTHING)
-    attendance_date=models.DateTimeField(auto_now_add=True)
-    session_year_id = models.ForeignKey(SessionYearModel, on_delete=models.CASCADE)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now_add=True)
-    objects = models.Manager()
-
-class AttendanceReport(models.Model):
-    id=models.AutoField(primary_key=True)
-    student_id=models.ForeignKey(Students,on_delete=models.DO_NOTHING)
-    attendance_id=models.ForeignKey(Attendance,on_delete=models.CASCADE)
-    status=models.BooleanField(default=False)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now_add=True)
-    objects=models.Manager()
-
 class LeaveReportStudent(models.Model):
     id=models.AutoField(primary_key=True)
     student_id=models.ForeignKey(Students,on_delete=models.CASCADE)
@@ -126,24 +108,6 @@ class FeedBackStaffs(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
 
-
-class NotificationStudent(models.Model):
-    id = models.AutoField(primary_key=True)
-    student_id = models.ForeignKey(Students, on_delete=models.CASCADE)
-    message = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
-    objects = models.Manager()
-
-
-class NotificationStaffs(models.Model):
-    id = models.AutoField(primary_key=True)
-    staff_id = models.ForeignKey(Staffs, on_delete=models.CASCADE)
-    message = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
-    objects = models.Manager()
-
 class StudentResult(models.Model):
     id=models.AutoField(primary_key=True)
     student_id=models.ForeignKey(Students,on_delete=models.CASCADE)
@@ -158,6 +122,15 @@ class StudentResult(models.Model):
 
     def __str__(self):
         return self.student_id.admin.username
+
+class StudentAssignments(models.Model):
+    id = models.AutoField(primary_key=True)
+    staff_id = models.ForeignKey(Staffs, on_delete=models.CASCADE)
+    assignment = models.TextField()
+    subject_id = models.ForeignKey(Subjects,on_delete=models.CASCADE)
+    course_id = models.ForeignKey(Courses, on_delete=models.CASCADE)
+    date_added = models.DateField(auto_now_add=True)
+
 
 
 @receiver(post_save,sender=CustomUser)

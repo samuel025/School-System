@@ -6,7 +6,7 @@ from datetime import datetime
 from uuid import uuid4
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-from management.models import CustomUser, Staffs, Courses, Subjects, Students, LeaveReportStaff, FeedBackStaffs, SessionYearModel, StudentResult
+from management.models import CustomUser, Staffs, Courses, Subjects, Students, StudentAssignments, LeaveReportStaff, FeedBackStaffs, SessionYearModel, StudentResult
 
 def staff_home(request):
     subjects=Subjects.objects.filter(staff_id=request.user.id)
@@ -171,3 +171,39 @@ def fetch_result_student(request):
     else:
         return HttpResponse("False")
 
+def staff_add_assignment(request):
+    subjects=Subjects.objects.filter(staff_id=request.user.id)
+    return render(request,"staff_template/staff_add_assignment.html",{"subjects":subjects})
+
+def staff_assignment_save(request):
+    if request.method!="POST":
+        return HttpResponseRedirect(reverse("staff_add_assignment"))
+    else:
+        subject=request.POST.get("subject")
+        assignment=request.POST.get("assignment")
+        try:
+            subject_obj=Subjects.objects.get(id=subject)
+            course = subject_obj.course_id
+            staff_id = Staffs.objects.get(admin=request.user.id)
+            studentassignment = StudentAssignments(subject_id=subject_obj, assignment=assignment, course_id=course, staff_id=staff_id)
+            studentassignment.save()
+            messages.success(request, "Successfully Added Assignment")
+            return HttpResponseRedirect(reverse("staff_add_assignment"))
+        except:
+            messages.error(request, "Failed to Add Assignment")
+            return HttpResponseRedirect(reverse("staff_add_assignment"))
+
+def staff_manage_assignment(request):
+    staff_id = Staffs.objects.get(admin=request.user.id)
+    assignment = StudentAssignments.objects.filter(staff_id=staff_id)
+    return render(request,"staff_template/staff_manage_assignment.html",{"assignment":assignment})
+
+def delete_assignment(request, assignment_id):
+        assignment = StudentAssignments.objects.get(id=assignment_id)
+        try:
+            assignment.delete()
+            messages.success(request, "Successfully Deleted Assignment")
+            return HttpResponseRedirect(reverse("staff_manage_assignment"))
+        except:
+            messages.error(request, "Failed to Delete Assignment")
+            return HttpResponseRedirect(reverse("staff_manage_assignment"))
