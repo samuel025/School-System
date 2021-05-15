@@ -181,17 +181,17 @@ def staff_assignment_save(request):
     else:
         subject=request.POST.get("subject")
         assignment=request.POST.get("assignment")
-        # try:
-        subject_obj=Subjects.objects.get(id=subject)
-        course = subject_obj.course_id
-        staff_id = Staffs.objects.get(admin=request.user.id)
-        studentassignment = StudentAssignments(subject_id=subject_obj, assignment=assignment, course_id=course, staff_id=staff_id)
-        studentassignment.save()
-        messages.success(request, "Successfully Added Assignment")
-        return HttpResponseRedirect(reverse("staff_add_assignment"))
-    # except:
-        messages.error(request, "Failed to Add Assignment")
-        return HttpResponseRedirect(reverse("staff_add_assignment"))
+        try:
+            subject_obj=Subjects.objects.get(id=subject)
+            course = subject_obj.course_id
+            staff_id = Staffs.objects.get(admin=request.user.id)
+            studentassignment = StudentAssignments(subject_id=subject_obj, assignment=assignment, course_id=course, staff_id=staff_id)
+            studentassignment.save()
+            messages.success(request, "Successfully Added Assignment")
+            return HttpResponseRedirect(reverse("staff_add_assignment"))
+        except:
+            messages.error(request, "Failed to Add Assignment")
+            return HttpResponseRedirect(reverse("staff_add_assignment"))
 
 def staff_manage_assignment(request):
     staff_id = Staffs.objects.get(admin=request.user.id)
