@@ -200,10 +200,10 @@ def staff_manage_assignment(request):
 
 def delete_assignment(request, assignment_id):
         assignment = StudentAssignments.objects.get(id=assignment_id)
-        try:
-            assignment.delete()
-            messages.success(request, "Successfully Deleted Assignment")
-            return HttpResponseRedirect(reverse("staff_manage_assignment"))
-        except:
-            messages.error(request, "Failed to Delete Assignment")
-            return HttpResponseRedirect(reverse("staff_manage_assignment"))
+        # try:
+        assignment.delete()
+        messages.success(request, "Successfully Deleted Assignment")
+        return HttpResponseRedirect(reverse("staff_manage_assignment"))
+    # except:
+        messages.error(request, "Failed to Delete Assignment")
+        return HttpResponseRedirect(reverse("staff_manage_assignment"))
