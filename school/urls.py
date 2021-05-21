@@ -72,7 +72,8 @@ urlpatterns = [
     path('admin_profile_save', admin_profile_save,name="admin_profile_save"),
     path('student_view_result', student_view_result, name="student_view_result"),
     path('edit_session_year', edit_session_year, name="edit_session_year"), 
-    path('delete_session/<str:session_id>', delete_session, name="delete_session"), 
+    path('delete_session/<str:session_id>', delete_session, name="delete_session"),
+    path('delete_course/<str:course_id>', delete_course, name="delete_course"), 
     #staff_urls
     path('staff_home', staff_home, name="staff_home"),
     path('staff_apply_leave', staff_apply_leave, name="staff_apply_leave"),

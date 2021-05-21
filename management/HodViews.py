@@ -487,4 +487,12 @@ def delete_session(request, session_id):
         messages.error(request, "Failed to Delete Session Year")
         return HttpResponseRedirect(reverse("edit_session_year"))
 
-
+def delete_course(request, course_id):
+    course = Courses.objects.get(id=course_id)
+    try:
+        course.delete()
+        messages.success(request, "Sucessfully Deleted Class")
+        return HttpResponseRedirect(reverse("manage_course"))
+    except:
+        messages.error(request, "Failed to Delete Class")
+        return HttpResponseRedirect(reverse("manage_course"))

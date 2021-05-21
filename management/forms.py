@@ -47,7 +47,7 @@ class AddStudentForm(forms.Form):
         ("Female", "Female")
     )
 
-    course = forms.ChoiceField(label="Class", choices=course_list, widget=forms.Select(attrs={"class":"form-control"}))
+    course = forms.ChoiceField(label="Class", widget=forms.Select(attrs={"class":"form-control"}))
     sex = forms.ChoiceField(label="Sex", choices=gender_choice, widget=forms.Select(attrs={"class":"form-control"}))
     session_year_id = forms.ChoiceField(label="Session Year", widget=forms.Select(attrs={"class":"form-control"}), choices=session_list)
     profile_pic = forms.FileField(label="Profile Picture", widget=forms.FileInput(attrs={"class":"form-control"}))
