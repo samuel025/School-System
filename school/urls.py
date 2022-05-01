@@ -86,7 +86,6 @@ urlpatterns = [
     path('get_students', get_students, name="get_students"),
     path('save_student_result', save_student_result, name="save_student_result"),
     path('edit_student_result',EditResultViewClass.as_view(), name="edit_student_result"),
-    path('fetch_result_student',fetch_result_student, name="fetch_result_student"),
     path('staff_add_assignment',staff_add_assignment, name="staff_add_assignment"),
     path('staff_assignment_save',staff_assignment_save, name="staff_assignment_save"),
     path('staff_manage_assignment',staff_manage_assignment, name="staff_manage_assignment"),

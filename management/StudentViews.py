@@ -102,3 +102,5 @@ def view_assignments(request):
     course=Courses.objects.get(id=student_obj.course_id.id)
     studentassignment = StudentAssignments.objects.filter(course_id=course)
     return render(request, "student_template/view_assignment.html", {"assignment":studentassignment})
+
+

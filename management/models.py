@@ -3,6 +3,12 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+TERM_CHOICES = (
+    ('1st term', '1st term'),
+    ('2nd term', '2nd term'),
+    ('3rd term', '3rd term')
+)
+
 # Create your models here.
 class CustomUser(AbstractUser):
     user_type_data=((1,"HOD"),(2,"Staff"),(3,"Student"))

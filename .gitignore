@@ -5,6 +5,7 @@
 __pycache__
 db.sqlite3
 media/
+migrations/
 
 
 # Backup files # 
@@ -27,7 +28,7 @@ media/
 
 # Python # 
 *.py[cod] 
-*$py.class 
+*$py.classs
 
 # Distribution / packaging 
 .Python build/ 
