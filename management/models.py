@@ -29,12 +29,21 @@ class Staffs(models.Model):
     updated_at=models.DateTimeField(auto_now_add=True)
     objects=models.Manager()
 
+    class Meta:
+        verbose_name_plural = "Staffs"
+    
+    def __str__(self):
+        return f"{self.admin.first_name} {self.admin.last_name}"
+
 class Courses(models.Model):
     id=models.AutoField(primary_key=True)
     course_name=models.CharField(max_length=255)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now_add=True)
     objects=models.Manager()
+
+    class Meta:
+        verbose_name_plural = "Courses"
 
     def __str__(self):
         return self.course_name
@@ -47,6 +56,9 @@ class Subjects(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now_add=True)
     objects=models.Manager()
+
+    class Meta:
+        verbose_name_plural = "Subjects"
 
     def __str__(self):
         return self.subject_name
@@ -71,8 +83,11 @@ class Students(models.Model):
     updated_at=models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
 
+    class Meta:
+        verbose_name_plural = "Students"
+
     def __str__(self):
-        return self.admin.username
+        return f"{self.admin.first_name} {self.admin.last_name}"
 
 class LeaveReportStudent(models.Model):
     id=models.AutoField(primary_key=True)
