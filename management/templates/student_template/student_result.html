@@ -1,0 +1,48 @@
+{% extends 'student_template/base_template.html' %}
+{% block page_title %}
+Result
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+                    <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+
+            <!-- /.card -->
+           <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">School Results</h3>
+                <!-- <h3 class="card-title">{{studentresult.class_result}}Result for {{ student.session_year_id.session_term }} ({{student.session_year_id.session_start_year|date:"Y"}}/{{student.session_year_id.session_end_year|date:"Y"}} Session) </h3> -->
+              </div>
+
+               <div class="table">
+               <table class="table">
+                   <tr>
+                       <th>Year</th>
+                       <th>Term</th>
+                       <!-- <th>class</th> -->
+                       <th>Action</th>
+                    </tr>
+                   {% for row in session %}
+                        <tr>
+                            <td>{{ row.session_year_session}}</td>
+                            <td>{{ row.session_term }}</td>
+                            <!-- <td>{%comment%}{{ row.class_result.course_name }}{%endcomment%}</td> -->
+                            <td><a href="/view_result/{{row.id}}" class="btn btn-success">View Result</a></td>
+                            
+                        </tr>
+                   {% endfor %}
+               </table>
+               </div>
+            </div>
+
+
+
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

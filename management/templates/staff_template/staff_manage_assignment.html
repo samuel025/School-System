@@ -1,0 +1,67 @@
+{% extends 'staff_template/base_template.html' %}
+{% block page_title %}Assignments{% endblock page_title %}
+{% block main_content %}
+<section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Manage Assignments</h3>
+
+              <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-default">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              {% if messages %}
+                {% for message in messages %}
+                {% if message.tags == 'error' %}
+                <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                {% endif %}
+                {% if message.tags == 'success' %}
+                <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th>Date Added</th>
+                    <th>Assignment</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for ass in assignment %}
+                  <tr>
+                    <td>{{ass.date_added}}</td>
+                    <td>{{ass.assignment|truncatechars:30}}</td>
+                    <td><a href="/delete_assignment/{{ass.id}}" class="btn btn-danger">Delete</a></td>
+                  </tr>
+                {% endfor %}
+                  
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+{% endblock main_content %}
